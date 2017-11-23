@@ -1,0 +1,25 @@
+{
+  "name": "news-site",
+  "version": "1.0.0",
+  "description": "Get news from newsapi.org",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitryRomaniuk/news-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitryRomaniuk/news-site/issues"
+  },
+  "homepage": "https://github.com/DmitryRomaniuk/news-site#readme",
+  "dependencies": {
+    "finalhandler": "^1.1.0",
+    "serve-static": "^1.13.1"
+  }
+}
