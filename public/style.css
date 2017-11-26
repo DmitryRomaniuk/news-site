@@ -1,0 +1,31 @@
+.list-news .logo {
+    float: left;
+    height: 80px;
+    margin-right: 10px;
+    opacity: 1;
+    transition: opacity 2s;
+    width: 80px;
+}
+
+.list-news .title {
+    font-size: 24px;
+    color: black;
+}
+
+.list-news article {
+    margin-top: 10px;
+}
+
+.channel-news {
+    margin: 10px;
+}
+
+.channel-news img {
+    float: left;
+    width: 50%;
+    margin-right: 10px;
+}
+
+.one-article {
+    margin: 10px 0;
+}

@@ -1,9 +1,150 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="module" src="index.js"></script>
-    </head>
-    <body>
-        Hello
-    </body>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script type="module" src="index.js"></script>
+  <script type="module" src="getChannelNews.js"></script>
+  <script type="module" src="getListChannels.js" defer></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">News Today</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div> -->
+  </nav>
+  <div class="row list-news">
+    <!-- <article class="col-12 col-md-6">
+      <a class="" href="#" title="ABC News" id="abc-news">
+        <img alt="ABC News" class="icon logo" src="https://icons.better-idea.org/icon?url=http://abcnews.go.com&amp;size=70..120..200">
+        <div class="title" title="ABC News">
+          ABC News
+        </div>
+        <div>
+          Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.
+        </div>
+        <div>
+          <kbd title="id: abc-news">abc-news</kbd>
+        </div>
+      </a>
+    </article>
+    <article class="col-12 col-md-6">
+      <a class="" href="#" title="Axios" id="axios">
+        <img alt="Axios" class="icon logo" src="https://icons.better-idea.org/icon?url=https://www.axios.com&amp;size=70..120..200">
+        <div class="title" title="Axios">
+          Axios
+        </div>
+        <div>
+          Axios are a new media company delivering vital, trustworthy news and analysis in the most efficient, illuminating and shareable
+          ways possible. 
+        </div>
+        <div>
+          <kbd title="id: axios">axios</kbd>
+        </div>
+      </a>
+    </article>
+    <article class="col-12 col-md-6">
+      <a class="" href="#" title="BBC News" id="bbc-news">
+        <img alt="BBC News" class="icon logo" src="https://icons.better-idea.org/icon?url=http://www.bbc.co.uk/news&size=70..120..200">
+        <div class="title" title="BBC News">
+          BBC News
+        </div>
+        <div>
+          Use BBC News for up-to-the-minute news, breaking news, video, audio and feature stories.
+        </div>
+        <div>
+          <kbd title="id: bbc-news">BBC News</kbd>
+        </div>
+      </a>
+    </article>
+    <article class="col-12 col-md-6">
+      <a class="" href="#" title="CNN" id="cnn">
+        <img alt="CNN" class="icon logo" src="https://icons.better-idea.org/icon?url=http://us.cnn.com&size=70..120..200">
+        <div class="title" title="CNN">
+          CNN
+        </div>
+        <div>
+            View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN. 
+        </div>
+        <div>
+          <kbd title="id: cnn">CNN</kbd>
+        </div>
+      </a>
+    </article>
+    <article class="col-12 col-md-6">
+      <a class="" href="#" title="ESPN" id="espn">
+        <img alt="ESPN" class="icon logo" src="https://icons.better-idea.org/icon?url=http://espn.go.com&size=70..120..200">
+        <div class="title" title="ESPN">
+          ESPN
+        </div>
+        <div>
+            ESPN has up-to-the-minute sports news coverage, scores, highlights and commentary for NFL, MLB, NBA, College Football, NCAA Basketball and more.
+        </div>
+        <div>
+          <kbd title="id: espn">ESPN</kbd>
+        </div>
+      </a>
+    </article>
+    <article class="col-12 col-md-6">
+      <a class="" href="#" title="NBC News" id="nbc-news">
+        <img alt="NBC News" class="icon logo" src="https://icons.better-idea.org/icon?url=http://www.nbcnews.com&size=70..120..200">
+        <div class="title" title="NBC News">
+          NBC News
+        </div>
+        <div>
+            Breaking news, videos, and the latest top stories in world news, business, politics, health and pop culture.
+        </div>
+        <div>
+          <kbd title="id: nbc-news">NBC News</kbd>
+        </div>
+      </a>
+    </article> -->
+  </div>
+  <div class="row channel-news">
+      <button type="button" class="btn btn-primary" id="back-to-list">Back to list channels</button>
+      <div class="channel-show-news"></div>
+  </div>
+</body>
+
 </html>
