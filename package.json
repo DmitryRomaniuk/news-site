@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Get news from newsapi.org",
   "main": "index.js",
+  "browserslist": "last 2 versions, ie 10",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run build && node server.js",
+    "build": "babel src -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +21,15 @@
   },
   "homepage": "https://github.com/DmitryRomaniuk/news-site#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.34",
     "finalhandler": "^1.1.0",
-    "serve-static": "^1.13.1"
+    "serve-static": "^1.13.1",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.34",
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/preset-env": "^7.0.0-beta.34",
+    "babel-plugin-transform-async-to-generator": "^6.24.1"
   }
 }

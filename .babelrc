@@ -1,0 +1,12 @@
+{
+    "presets": [
+      ["@babel/preset-env", {
+        "useBuiltIns": "entry",
+        "modules": "umd"
+      }]
+    ],
+    "plugins": [
+      ["transform-async-to-generator"],
+      ["./console-remove.js"]
+    ]
+  }

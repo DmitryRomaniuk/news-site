@@ -1,11 +1,11 @@
-import getChannelNews from "./getChannelNews.js";
-import getListChannels from "./getListChannels.js";
-
 $('.channel-news').hide();
 
-document.querySelector('.list-news').addEventListener('click', event => {
-    getChannelNews(event.target.parentNode.id)
-        .then(({articles}) => {
+document.addEventListener("DOMContentLoaded", () => {
+    console.log(1);
+    document.querySelector('.list-news').addEventListener('click', event => {
+        $('.list-news').hide();
+        const getArticles = async () => {
+            const {articles} = await window.getChannelNews.default(event.target.parentNode.id);
             const wrapper = document.createElement( "div" );
             articles.forEach(({ description, title, author, url, urlToImage }) => {
                 const article = document.createElement( "article" );
@@ -29,23 +29,23 @@ document.querySelector('.list-news').addEventListener('click', event => {
             });
             wrapper.classList.add('row');
             document.querySelector('.channel-show-news').appendChild(wrapper);
-        });
-    $('.list-news').toggle();
-    $('.channel-news').toggle();
-});
+            $('.channel-news').show();
+        }
+        getArticles();
+    });
+    
+    document.querySelector('#back-to-list').addEventListener('click', () => {
+        $('.channel-news').hide();
+        $('.channel-show-news').children().remove();
+        $('.list-news').show();
+    });
 
-document.querySelector('#back-to-list').addEventListener('click', () => {
-    $('.channel-news').toggle();
-    $('.channel-show-news').children().remove();
-    $('.list-news').toggle();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
     const urlChannel = `https://newsapi.org/v2/sources?language=en&apiKey=1013e5c10e394f778a09b8476d2b9570`;
     var myHeaders = new Headers();
-    return fetch(urlChannel, {method: 'GET', mode: 'cors', headers: myHeaders,})
-        .then(response => response.json())
-        .then(({sources}) => {
+
+    const getDataForMain = async () => {
+        const response = await fetch(urlChannel, {method: 'GET', mode: 'cors', headers: myHeaders,})
+        const {sources} = await response.json();
         const wrapper = document.createElement( "div" );
         sources.forEach(({ id, name, description, url }) => {
             const link = document.createElement( "a" );
@@ -76,9 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const article = document.createElement( "article" );
             article.classList.add('col-12', 'col-md-6');
             article.appendChild(link);
-            wrapper.appendChild(article);
+                wrapper.appendChild(article);
+            wrapper.classList.add('row');
+            document.querySelector('.list-news').appendChild(wrapper);
         });
-        wrapper.classList.add('row');
-        document.querySelector('.list-news').appendChild(wrapper);
-    })
+    }
+
+    return getDataForMain();
 });
