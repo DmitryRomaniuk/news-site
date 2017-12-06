@@ -7,6 +7,8 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "build": "babel src -d public",
+    "dev:start": "nodemon -e js --ignore build --ignore public --exec babel-node ./server.js",
+    "dev:wds": "webpack-dev-server --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,6 +32,12 @@
     "@babel/cli": "^7.0.0-beta.34",
     "@babel/core": "^7.0.0-beta.34",
     "@babel/preset-env": "^7.0.0-beta.34",
-    "babel-plugin-transform-async-to-generator": "^6.24.1"
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "nodemon": "^1.12.5",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.5"
   }
 }
