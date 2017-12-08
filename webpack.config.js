@@ -1,16 +1,14 @@
 const webpack = require("webpack");
 
-const isProd = false;
+const isProd = true;
 
 var path = require("path");
 module.exports = {
-  entry: {
-    app: ["./src/index.js"]
-  },
+  entry: "./lib/index.js",
   output: {
-    filename: "public/bundle.js",
+    filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
-    publicPath: isProd ? "/public/" : `http://localhost:${7000}/public/`
+    publicPath: isProd ? "/" : `http://localhost:${7000}/public/`
   },
   module: {
     rules: [
