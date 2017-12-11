@@ -211,6 +211,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 
     var _default = function _default() {
+      console.log(1);
       document.querySelector('.list-news').addEventListener('click', function (event) {
         $('.list-news').hide();
         $('#back-to-list').show();

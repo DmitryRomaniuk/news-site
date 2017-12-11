@@ -21,7 +21,8 @@ module.exports = {
           { loader: "less-loader" }
         ],
         exclude: /node_modules/
-      }
+      },
+      { test: /\.json/, use: path.resolve('./webpack-clean-json'), exclude: /node_modules/ }
     ]
   },
   devtool: isProd ? false : "source-map",

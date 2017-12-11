@@ -1,4 +1,5 @@
 import '../src/style.less';
+import '../src/check.json';
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('load-main').addEventListener('click', () => {
