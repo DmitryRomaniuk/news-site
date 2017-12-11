@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
-    publicPath: isProd ? "/" : `http://localhost:${7000}/public/`
+    publicPath: isProd ? "/news-site/public/" : `http://localhost:${7000}/public/`
   },
   module: {
     rules: [
