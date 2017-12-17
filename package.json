@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "build": "webpack",
-    "dev:start": "nodemon -e js --ignore build --ignore public --exec babel-node ./server.js",
+    "dev:start": "nodemon -e js --ignore build --ignore public --exec node ./server.js",
     "dev:wds": "webpack-dev-server --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

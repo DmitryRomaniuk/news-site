@@ -85,7 +85,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "55fa7f95ee1ff2e9e929"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "24ceaffb921f3ecc1e0c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -975,7 +975,7 @@ module.exports = function(list, options) {
 
 	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 	// tags it will allow on a page
-	if (!options.singleton) options.singleton = isOldIE();
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
 
 	// By default, add <style> tags to the <head> element
 	if (!options.insertInto) options.insertInto = "head";
@@ -1385,27 +1385,164 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./src/facade.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.facade = mod.exports;
+  }
+})(this, function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  var Bank =
+  /*#__PURE__*/
+  function () {
+    function Bank() {
+      _classCallCheck(this, Bank);
+    }
+
+    _createClass(Bank, [{
+      key: "verify",
+      value: function verify(amount) {
+        return amount < 999;
+      }
+    }]);
+
+    return Bank;
+  }();
+
+  var CreditHistory =
+  /*#__PURE__*/
+  function () {
+    function CreditHistory() {
+      _classCallCheck(this, CreditHistory);
+    }
+
+    _createClass(CreditHistory, [{
+      key: "check",
+      value: function check(name) {
+        return true;
+      }
+    }]);
+
+    return CreditHistory;
+  }();
+
+  var Balance =
+  /*#__PURE__*/
+  function () {
+    function Balance() {
+      _classCallCheck(this, Balance);
+    }
+
+    _createClass(Balance, [{
+      key: "check",
+      value: function check(name) {
+        return true;
+      }
+    }]);
+
+    return Balance;
+  }();
+
+  var Credit =
+  /*#__PURE__*/
+  function () {
+    function Credit(name) {
+      _classCallCheck(this, Credit);
+
+      this.name = name;
+    }
+
+    _createClass(Credit, [{
+      key: "applyFor",
+      value: function applyFor(amount) {
+        var isApproved = new Bank().verify(amount);
+        var bankResult = isApproved ? "approved" : "denied";
+        var isPositiveBalance = new Balance().check(this.name);
+        var balance = isPositiveBalance ? "positive balance" : "negative balance";
+        var isGoodCreditHistory = new CreditHistory().check(this.name);
+        var creditHistory = isGoodCreditHistory ? "good" : "poor";
+        return "".concat(this.name, " has been ").concat(bankResult, " for the ").concat(amount, " credit. With a ").concat(creditHistory, " credit standing and having a ").concat(balance);
+      }
+    }]);
+
+    return Credit;
+  }();
+
+  _exports.default = Credit;
+});
+
+/***/ }),
+
 /***/ "./src/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json"), __webpack_require__("./src/observer.js"), __webpack_require__("./src/facade.js"), __webpack_require__("./src/singleTone.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if (typeof exports !== "undefined") {
-    factory(require("../src/style.less"), require("../src/check.json"));
+    factory(require("./style.less"), require("./check.json"), require("./observer"), require("./facade"), require("./singleTone"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.style, global.check);
+    factory(global.style, global.check, global.observer, global.facade, global.singleTone);
     global.index = mod.exports;
   }
-})(this, function (_style, _check) {
+})(this, function (_style, _check, _observer, _facade, _singleTone) {
   "use strict";
 
+  _observer = _interopRequireDefault(_observer);
+  _facade = _interopRequireDefault(_facade);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  var counterObserver = new _observer.default();
+  console.log(_singleTone.counter.getCounter());
+
+  _singleTone.counter.increaseCounter();
+
+  _singleTone.counter.increaseCounter();
+
+  console.log(_singleTone.counter.getCounter());
+
+  _singleTone.counter.decreaseCounter();
+
+  console.log(_singleTone.counter.getCounter());
+  counterObserver.subscribe(function (data) {
+    console.log('first subscription is invoked with data ', data);
+  });
+  counterObserver.subscribe(function (data) {
+    console.log('second subscription is invoked with data ', data);
+  });
+  counterObserver.broadcast(_singleTone.counter.getCounter());
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('load-main').addEventListener('click', function () {
       $('#load-main').hide();
@@ -1416,6 +1553,141 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       });
     });
   });
+  var credit = new _facade.default('Dmitry');
+  var creditSmall = credit.applyFor(99);
+  var creditMedium = credit.applyFor(199);
+  var creditLarge = credit.applyFor(99999);
+  console.log('creditSmall', creditSmall);
+  console.log('creditMedium', creditMedium);
+  console.log('creditLarge', creditLarge);
+});
+
+/***/ }),
+
+/***/ "./src/observer.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.observer = mod.exports;
+  }
+})(this, function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  var EventObserver =
+  /*#__PURE__*/
+  function () {
+    function EventObserver() {
+      _classCallCheck(this, EventObserver);
+
+      this.observers = [];
+    }
+
+    _createClass(EventObserver, [{
+      key: "subscribe",
+      value: function subscribe(fn) {
+        this.observers.push(fn);
+      }
+    }, {
+      key: "unsubscribe",
+      value: function unsubscribe(fn) {
+        this.observers = this.observers.filter(function (subscriber) {
+          return subscriber !== fn;
+        });
+      }
+    }, {
+      key: "broadcast",
+      value: function broadcast(data) {
+        this.observers.forEach(function (subscriber) {
+          return subscriber(data);
+        });
+      }
+    }]);
+
+    return EventObserver;
+  }();
+
+  _exports.default = EventObserver;
+});
+
+/***/ }),
+
+/***/ "./src/singleTone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.singleTone = mod.exports;
+  }
+})(this, function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.counter = void 0;
+
+  var counter = function () {
+    var instance;
+    var initialCount = 0;
+
+    var increaseCounter = function increaseCounter() {
+      return initialCount++;
+    };
+
+    var decreaseCounter = function decreaseCounter() {
+      return initialCount--;
+    };
+
+    var getCounter = function getCounter() {
+      return initialCount;
+    };
+
+    var createInstance = function createInstance() {
+      return {
+        getCounter: getCounter,
+        increaseCounter: increaseCounter,
+        decreaseCounter: decreaseCounter
+      };
+    };
+
+    return instance || (instance = createInstance());
+  }();
+
+  _exports.counter = counter;
 });
 
 /***/ }),

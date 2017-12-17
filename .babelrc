@@ -7,7 +7,6 @@
     ],
     "plugins": [
       ["transform-async-to-generator"],
-      ["./console-remove.js"],
       ["@babel/plugin-syntax-dynamic-import"]
     ]
   }
