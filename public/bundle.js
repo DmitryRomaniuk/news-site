@@ -85,7 +85,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "33d67e95ca33fcb89f4a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "55fa7f95ee1ff2e9e929"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -803,64 +803,10 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./lib/index.js")(__webpack_require__.s = "./lib/index.js");
+/******/ 	return hotCreateRequire("./src/index.js")(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./lib/index.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (typeof exports !== "undefined") {
-    factory();
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory();
-    global.index = mod.exports;
-  }
-})(this, function () {
-  "use strict";
-
-  (function (global, factory) {
-    if (true) {
-      !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else if (typeof exports !== "undefined") {
-      factory(require("../src/style.less"), require("../src/check.json"));
-    } else {
-      var mod = {
-        exports: {}
-      };
-      factory(global.style, global.check);
-      global.index = mod.exports;
-    }
-  })(void 0, function (_style, _check) {
-    "use strict";
-
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById('load-main').addEventListener('click', function () {
-        $('#load-main').hide();
-        return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, "./lib/loadMainPage.js")).then(function (loadMainPage) {
-          return loadMainPage.default();
-        }).catch(function (error) {
-          return 'An error occurred while loading the component';
-        });
-      });
-    });
-  });
-});
-
-/***/ }),
 
 /***/ "./node_modules/css-loader/index.js!./node_modules/less-loader/dist/cjs.js!./src/style.less":
 /***/ (function(module, exports, __webpack_require__) {
@@ -1436,6 +1382,41 @@ module.exports = function (css) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({"a":"dd",});
 
+
+/***/ }),
+
+/***/ "./src/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(require("../src/style.less"), require("../src/check.json"));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(global.style, global.check);
+    global.index = mod.exports;
+  }
+})(this, function (_style, _check) {
+  "use strict";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('load-main').addEventListener('click', function () {
+      $('#load-main').hide();
+      return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, "./src/loadMainPage.js")).then(function (loadMainPage) {
+        return loadMainPage.default();
+      }).catch(function (error) {
+        return 'An error occurred while loading the component';
+      });
+    });
+  });
+});
 
 /***/ }),
 

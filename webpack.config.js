@@ -4,7 +4,7 @@ const isProd = true;
 
 var path = require("path");
 module.exports = {
-  entry: "./lib/index.js",
+  entry: "./src/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),

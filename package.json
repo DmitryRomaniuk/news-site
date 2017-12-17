@@ -6,7 +6,7 @@
   "browserslist": "last 2 versions, ie 10",
   "scripts": {
     "start": "npm run build && node server.js",
-    "build": "rimraf lib && babel src -d lib && webpack",
+    "build": "webpack",
     "dev:start": "nodemon -e js --ignore build --ignore public --exec babel-node ./server.js",
     "dev:wds": "webpack-dev-server --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,25 +23,24 @@
   },
   "homepage": "https://github.com/DmitryRomaniuk/news-site#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.34",
+    "@babel/polyfill": "^7.0.0-beta.35",
     "finalhandler": "^1.1.0",
     "serve-static": "^1.13.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.34",
-    "@babel/core": "^7.0.0-beta.34",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.34",
-    "@babel/preset-env": "^7.0.0-beta.34",
+    "@babel/cli": "^7.0.0-beta.35",
+    "@babel/core": "^7.0.0-beta.35",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.35",
+    "@babel/preset-env": "^7.0.0-beta.35",
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "css-loader": "^0.28.7",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    "nodemon": "^1.12.5",
-    "rimraf": "^2.6.2",
-    "style-loader": "^0.19.0",
+    "nodemon": "^1.13.3",
+    "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.7"
   }
 }
