@@ -85,7 +85,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "24ceaffb921f3ecc1e0c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5390c779c32be2757bd9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1503,24 +1503,25 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json"), __webpack_require__("./src/observer.js"), __webpack_require__("./src/facade.js"), __webpack_require__("./src/singleTone.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/style.less"), __webpack_require__("./src/check.json"), __webpack_require__("./src/observer.js"), __webpack_require__("./src/facade.js"), __webpack_require__("./src/singleTone.js"), __webpack_require__("./src/redux-store.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if (typeof exports !== "undefined") {
-    factory(require("./style.less"), require("./check.json"), require("./observer"), require("./facade"), require("./singleTone"));
+    factory(require("./style.less"), require("./check.json"), require("./observer"), require("./facade"), require("./singleTone"), require("./redux-store"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.style, global.check, global.observer, global.facade, global.singleTone);
+    factory(global.style, global.check, global.observer, global.facade, global.singleTone, global.reduxStore);
     global.index = mod.exports;
   }
-})(this, function (_style, _check, _observer, _facade, _singleTone) {
+})(this, function (_style, _check, _observer, _facade, _singleTone, _reduxStore) {
   "use strict";
 
   _observer = _interopRequireDefault(_observer);
   _facade = _interopRequireDefault(_facade);
+  _reduxStore = _interopRequireDefault(_reduxStore);
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1560,6 +1561,32 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   console.log('creditSmall', creditSmall);
   console.log('creditMedium', creditMedium);
   console.log('creditLarge', creditLarge);
+
+  var counterReducer = function counterReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+
+      case 'DECREMENT':
+        return state - 1;
+
+      default:
+        return state;
+    }
+  };
+
+  var store = (0, _reduxStore.default)(counterReducer);
+  store.subscribe(function () {
+    document.getElementsByClassName('redux-counter')[0].innerHTML = store.getState();
+  });
+  document.addEventListener('click', function () {
+    store.dispatch({
+      type: 'INCREMENT'
+    });
+  });
 });
 
 /***/ }),
@@ -1630,6 +1657,69 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }();
 
   _exports.default = EventObserver;
+});
+
+/***/ }),
+
+/***/ "./src/redux-store.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.reduxStore = mod.exports;
+  }
+})(this, function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = createStore;
+
+  function createStore(reducer) {
+    var state;
+    var listeners = [];
+
+    var getState = function getState() {
+      return state;
+    };
+
+    var dispatch = function dispatch(action) {
+      state = reducer(state, action);
+      listeners.forEach(function (listener) {
+        return listener();
+      });
+    };
+
+    var subscribe = function subscribe(listener) {
+      listeners.push(listener);
+      return function () {
+        listeners = listeners.filter(function (l) {
+          return l !== listener;
+        });
+      };
+    };
+
+    dispatch({});
+    return {
+      getState: getState,
+      dispatch: dispatch,
+      subscribe: subscribe
+    };
+  }
+
+  ;
 });
 
 /***/ }),

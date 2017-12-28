@@ -3,6 +3,7 @@ import './check.json';
 import Observer from './observer';
 import FacadeCredit from './facade';
 import { counter } from './singleTone';
+import createStore from './redux-store';
 
 let counterObserver = new Observer();
 console.log(counter.getCounter());
@@ -35,3 +36,25 @@ const creditLarge = credit.applyFor(99999);
 console.log('creditSmall', creditSmall);
 console.log('creditMedium', creditMedium);
 console.log('creditLarge', creditLarge);
+
+
+const counterReducer = (state = 0, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      case 'DECREMENT':
+        return state - 1;
+      default:
+        return state;
+    }
+  }
+
+const store = createStore(counterReducer);
+
+store.subscribe(() => {
+  document.getElementsByClassName('redux-counter')[0].innerHTML = store.getState();
+});
+
+document.addEventListener('click', () => {
+    store.dispatch({ type : 'INCREMENT' })
+});
