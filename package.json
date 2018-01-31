@@ -5,6 +5,7 @@
   "main": "index.js",
   "browserslist": "last 2 versions, ie 10",
   "scripts": {
+    "nodeserver": "nodemon --watch ./ server.js",
     "start": "npm run build && node server.js",
     "build": "webpack",
     "dev:start": "nodemon -e js --ignore build --ignore public --exec node ./server.js",

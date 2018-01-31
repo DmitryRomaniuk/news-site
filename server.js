@@ -64,15 +64,4 @@ app.use(function(err, req, res, next) {
     res.status(500).send(html);
   });
 });
-
-// app.all('*', function (req, res) {
-//   res.json(JSON.stringify('Hello World'));
-// });
-
-// app.all('*', function (req, res) {
-//   res.render('error', { error: 500, body: 'please contact administrator', title: 'You got error' }, function(err, html) {
-//     logger.info('error 500');
-//     res.status(500).send(html);
-//   });
-// });
  
