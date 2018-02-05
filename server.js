@@ -1,9 +1,25 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('./logger');
+var mongoose = require('./src/mongoose');
 var app = express();
 app.listen(8000);
 console.log('Server started on localhost:8000')
+
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+passport.use(new GoogleStrategy({
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://www.news-simple-site.com/auth/google/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+       return done(err, user);
+     });
+}
+));
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -27,6 +43,15 @@ var blogs = {
   id8: 'eqwrasd',
   id9: 'reaasdf',
 }
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 app.get('/blogs/:id', function (req, res) {
   res.json({id: req.params.id});
